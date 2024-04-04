@@ -16,7 +16,7 @@ const LogIn = () => {
     const [successMsg, setSuccessMsg] = useState(null);
     const [emailError, setEmailError] = useState(null);
     const [passError, setPassError] = useState(null);
-    const [passShow, setPassShow] = useState(false)
+    // const [passShow, setPassShow] = useState(false)
     const navigate = useNavigate();
     const location= useLocation()
     console.log(location);
