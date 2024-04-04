@@ -16,3 +16,7 @@ body{
 
     text-decoration: underline;
 }
+#category .active{
+
+    background-color: gray;
+}
