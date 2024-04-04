@@ -3,7 +3,6 @@ import { CiShare2 } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
 import PropTypes from 'prop-types'; // ES6
 import ReactStars from "react-rating-stars-component";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
@@ -12,8 +11,8 @@ const NewsCard = ({ news }) => {
    
     const { _id , rating, total_view, title, author, image_url, details } = news;
 
-    const [readBtn,setReadBtn]=useState(true);
-    const cardDetails= readBtn? details.slice(0,300):details;
+    // const [readBtn,setReadBtn]=useState(true);
+    // const cardDetails= readBtn? details.slice(0,300):details;
 
 
     return (
@@ -42,7 +41,7 @@ const NewsCard = ({ news }) => {
                 <div className=" border-dashed border-2 rounded-md">
                     <img className=" rounded-md" src={image_url} alt="" />
                 </div>
-                <p className="my-7">{cardDetails} 
+                <p className="my-7">{details.slice(0,300)} 
                 {
                     // details.length>300&& <span><span  onClick={()=>setReadBtn(!readBtn)} className=" text-orange-500 font-semibold btn btn-link">{readBtn?'Read More': 'Read Less'} </span></span> 
                     details.length>300&& <Link to={`/details/${_id}`}><button className="btn btn-link">Read More ...</button></Link>

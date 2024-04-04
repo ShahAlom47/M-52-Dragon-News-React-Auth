@@ -12,6 +12,7 @@ import Register from './Pages/Autentications/Register';
 import LogIn from './Pages/Autentications/LogIn';
 import AuthProvider from './AuthProbider/AuthProvider';
 import PrivetRoute from './Routes/PrivetRoute';
+import ErrorPage from './Pages/ErrorPage';
 
 
 
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <PrivetRoute></PrivetRoute>,
+        element: <PrivetRoute><NewsDetails></NewsDetails></PrivetRoute>,
       },
     ]
 

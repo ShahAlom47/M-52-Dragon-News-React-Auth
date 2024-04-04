@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../AuthProbider/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CiFacebook } from "react-icons/ci";
 import { VscGithub } from "react-icons/vsc";
 import { RiGoogleFill } from "react-icons/ri";
@@ -18,10 +18,11 @@ const LogIn = () => {
     const [passError, setPassError] = useState(null);
     const [passShow, setPassShow] = useState(false)
     const navigate = useNavigate();
-
+    const location= useLocation()
+    console.log(location);
     const emailRef =useRef()
 
-    const { user, googleLogIn, GitHubLogIn, userLogin , forgetPassword} = useContext(AuthContext)
+    const {  googleLogIn, GitHubLogIn, userLogin , forgetPassword} = useContext(AuthContext)
 
 
     const loginHandel = (e) => {
@@ -57,7 +58,7 @@ const LogIn = () => {
                 console.log(result.user);
                 setSuccessMsg('Login Successfully')
                 e.target.reset()
-                navigate('/')
+                navigate(location.state? location.state:'/')
             })
             .catch((error) => {
                 const errorMessage = error.message;

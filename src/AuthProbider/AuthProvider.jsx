@@ -4,65 +4,69 @@ import { signInWithPopup, GoogleAuthProvider, onAuthStateChanged, GithubAuthProv
 // import { GithubAuthProvider } from "firebase/auth";
 import auth from "../Services/firebase.config";
 
- export const  AuthContext= createContext(null);
+export const AuthContext = createContext(null);
 
- const googleProvider = new GoogleAuthProvider();
- 
-
+const googleProvider = new GoogleAuthProvider();
 const gitProvider = new GithubAuthProvider();
 
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
+    const [loading, setLoading]=useState(true)
+    const [user, setUser] = useState(12345);
 
- const [user, setUser ] = useState(12345);
+    const userLogin = (email, password) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password)
+    }
+    const userRegister = (email, password) => {
+        setLoading(true)
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
 
- const userLogin = (email,password)=>{
-    return signInWithEmailAndPassword(auth, email, password)
- }
- const userRegister =(email,password)=>{
-    return createUserWithEmailAndPassword(auth, email, password)
- }
+    const googleLogIn = () => {
+        setLoading(true)
+        return signInWithPopup(auth, googleProvider)
+    }
+
+
+    const GitHubLogIn = () => {
+        setLoading(true)
+        return signInWithPopup(auth, gitProvider)
+    }
+
+    const LogOutUser = () => {
+        setLoading(true)
+        return signOut(auth)
+
+    }
+
+    const forgetPassword = (email) => {
     
-const googleLogIn=()=>{
-return signInWithPopup (auth, googleProvider)
-}
+        return sendPasswordResetEmail(auth, email)
+    }
 
 
-const GitHubLogIn=()=>{
-return signInWithPopup(auth, gitProvider)
-}
+    useEffect(() => {
 
-const LogOutUser = () => {
-    return signOut(auth)
+        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+            setLoading(false)
+        });
 
-}
-
-const forgetPassword =(email)=>{
-
-return sendPasswordResetEmail(auth, email)
-}
+        return () => unSubscribe
+    }, [])
 
 
-useEffect(() => {
-
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-    });
-
-    return () => unSubscribe
-}, [])
-
-
-  const AuthInfo = {user,googleLogIn,GitHubLogIn,LogOutUser, userLogin ,userRegister, forgetPassword};
+    const AuthInfo = { user, googleLogIn, GitHubLogIn, LogOutUser, userLogin, userRegister, forgetPassword, loading };
 
 
     return (
         <div>
             <AuthContext.Provider value={AuthInfo}>
-            {children}
+                {children}
             </AuthContext.Provider>
 
-            
+
         </div>
     );
 };
