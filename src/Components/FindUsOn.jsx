@@ -1,8 +1,17 @@
 
+import { useContext } from "react";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { AuthContext } from "../AuthProbider/AuthProvider";
+
+
+
 
 
 const FindUsOn = () => {
+
+    const {user}=useContext(AuthContext);
+
+console.log(user);
     return (
         <div>
             <h1 className=" text-xl font-bold text-gray-500 my-4">Login With</h1>

@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import { AuthContext } from "../AuthProbider/AuthProvider";
 
 const LogInWith = () => {
+     const {user}=useContext(AuthContext);
+     
 
     const googleLogHendel=()=>{
 
