@@ -12,7 +12,7 @@ const gitProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [loading, setLoading]=useState(true)
-    const [user, setUser] = useState(12345);
+    const [user, setUser] = useState(null);
 
     const userLogin = (email, password) => {
         setLoading(true)
