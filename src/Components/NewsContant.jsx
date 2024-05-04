@@ -13,7 +13,7 @@ const NewsContant = () => {
         //     .then(res => res.json())
         //     .then(news => setAllNews(news))
 
-            axios.get('http://localhost:3000/news', {  withCredentials:true })
+            axios.get('http://localhost:3000/news', )
               .then(function (response) {
                 console.log(response);
                 setAllNews(response.data)

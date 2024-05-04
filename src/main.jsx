@@ -13,6 +13,7 @@ import LogIn from './Pages/Autentications/LogIn';
 import AuthProvider from './AuthProbider/AuthProvider';
 import PrivetRoute from './Routes/PrivetRoute';
 import ErrorPage from './Pages/ErrorPage';
+import axios from 'axios';
 
 
 
@@ -48,6 +49,8 @@ const router = createBrowserRouter([
   },
 ]);
 
+axios.defaults.withCredentials = true
+// aita use korar fole bar bar server a cookies pata te hobe na . akon jekane icca oikhane receive kora jave 
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
