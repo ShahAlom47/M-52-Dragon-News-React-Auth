@@ -5,6 +5,8 @@ import { CiFacebook } from "react-icons/ci";
 import { VscGithub } from "react-icons/vsc";
 import { RiGoogleFill } from "react-icons/ri";
 import Navbar from "../../Components/Navbar";
+import axios from "axios";
+import { linkWithCredential } from "firebase/auth";
 
 
 
@@ -19,7 +21,6 @@ const LogIn = () => {
     // const [passShow, setPassShow] = useState(false)
     const navigate = useNavigate();
     const location= useLocation()
-    console.log(location);
     const emailRef =useRef()
 
     const {  googleLogIn, GitHubLogIn, userLogin , forgetPassword} = useContext(AuthContext)
@@ -55,10 +56,29 @@ const LogIn = () => {
 
         userLogin(email, password)
             .then((result) => {
-                console.log(result.user);
+                const userEmail= result.user.email
+               
+                axios.post('http://localhost:3000/jwt', {userEmail },{ withCredentials: true })
+
+                // jekuno jayga theke cokis ta patanur jonno credentials us kora hoyece ,same jaygay surver site recive kora hoyece /
+                  .then(function (response) {
+                    console.log(response.data);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+                
+
+
+
+
                 setSuccessMsg('Login Successfully')
-                e.target.reset()
-                navigate(location.state? location.state:'/')
+                alert('Login Successfully')
+
+
+
+                // e.target.reset()
+                // navigate(location.state? location.state:'/')
             })
             .catch((error) => {
                 const errorMessage = error.message;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import NewsCard from "./NewsCard";
+import axios from "axios";
 
 
 const NewsContant = () => {
@@ -8,9 +9,18 @@ const NewsContant = () => {
     
     
     useEffect(() => {
-        fetch('../.././/public/data/news.json')
-            .then(res => res.json())
-            .then(news => setAllNews(news))
+        // fetch('http://localhost:3000/news')
+        //     .then(res => res.json())
+        //     .then(news => setAllNews(news))
+
+            axios.get('http://localhost:3000/news', {  withCredentials:true })
+              .then(function (response) {
+                console.log(response);
+                setAllNews(response.data)
+              })
+              .catch(function (error) {
+                console.log(error);
+              })
 
     }, [])
 

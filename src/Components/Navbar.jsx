@@ -39,6 +39,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end gap-2 my-6">
+                <p className="text-red-500">{user?.email}</p>
                 <div className="w-12 h-12 rounded-full "><img className="rounded-full" src={user ? "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" : userLogo} alt="" /></div>
                 {
                     user ? <NavLink ><button onClick={logOutHandel} className="btn bg-gray-700 text-white"> Logout</button></NavLink> : <NavLink to={'/login'} ><button className="btn bg-gray-700 text-white"> LogIn</button></NavLink>
